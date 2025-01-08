@@ -14,10 +14,19 @@
 
 body {
   margin: 0;
+  text-align: center;
+}
+
+main{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  margin: 4rem 2rem;
+  gap: 2rem;
+}
+
+p{
+  margin-block: 0;
 }

@@ -1,1 +1,111 @@
-/* App.css goes here */
+header{
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+
+.flex-column{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.game-description{
+    font-weight: 500;
+    font-size: 0.875rem;
+    max-width: 400px;
+    color: #8E8E8E;
+}
+
+.game-updates{
+    width: 352px;
+    height: 59px;
+    margin: auto;
+    background-color: #7A5EA7;
+    border: 3px dotted #323232;
+    border-radius: 4px;
+}
+
+.updates-main-text{
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.updates-sub-text{
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.result-text{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+
+.lost{
+    background-color: #BA2A2A;  
+    border: 0;  
+}
+
+.won{
+    background-color: #10A95B;
+    border: 0;
+}
+
+.languages{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.1rem;
+    max-width: 300px;
+    margin-inline: auto;
+}
+
+.lang{
+    border-radius: 3px;
+    border: 0;
+    padding: 0.28rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-inline: 0;
+}
+
+.letters{
+    display: flex;
+    justify-content: center;
+    gap: 0.2rem;
+}
+
+.letter-element{
+    width: 40px;
+    height: 40px;
+    background-color: #323232;
+    border-bottom: 1px solid #F9F4DA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.letter-element-text{
+    display: block;
+    justify-items: center;
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.alphabets{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    max-width: 500px;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+.alphabet-element{
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: #FCBA29;
+    border: 1px solid #D7D7D7
+}
