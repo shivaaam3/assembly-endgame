@@ -1,50 +1,49 @@
+import { useEffect, useState } from "react"
 import Keyboard from "./Keyboard"
+import Header from "./Header"
+import Update from "./Update"
+import Language from "./Language"
+import Letters from "./Letters"
 
-export default function Main() { 
+
+export default function Main() {
+
+    // const [wordArray, setWordArray] = useState()
+    const [gameWord, setGameWord] = useState("Banana")
+    const [currentState, setCurrentState] = useState(Array(gameWord.length).fill(null))
+    const [pressedKeys, setPressedKeys] = useState([])
+
+    function onKeyClick(key) { 
+        const keyOccuranceArr = findAllOccurences(key)
+        setCurrentState(prevState => ( 
+            prevState.map((letter, index) => (
+                // Check if Key Occurance Array contains the current index of iteration of game state
+                // If it does, populate that index of game state with the key
+                keyOccuranceArr.indexOf(index) !== -1 ? key : letter
+            ))
+        ))
+
+        // Update pressed key array with the key pressed
+        // If keyOccuranceArr length is greater than zero, key pressed is valid
+        setPressedKeys(prev => [...prev, { value: key, isValid: keyOccuranceArr.length > 0 }])
+    }
+
+    function findAllOccurences(key) { 
+        const arr = [];
+        for (let i = 0; i < gameWord.length; ++i) { 
+            if (gameWord[i].toLowerCase() === key.toLowerCase())
+                arr.push(i)
+        }
+        return arr
+    }
+
     return (
         <main>
-            <header>
-                Assembly: Endgame
-                <p className="game-description">Guess the word in under 8 attempts to keep the programming world safe from Assembly!</p>
-            </header>
-
-            <div className=" flex-column game-updates">
-                <p className="updates-main-text">“Farewell HTML & CSS” 🫡</p>
-                <p className="updates-sub-text"></p>
-            </div>
-
-            <div className="languages">
-                <button style={{backgroundColor: '#E2680F', color: 'white'}} className="lang">HTML</button>
-                <button style={{backgroundColor: '#328AF1', color: 'white'}} className="lang">CSS</button>
-                <button style={{backgroundColor: '#F4EB13'}} className="lang">Javascript</button>
-                <button style={{backgroundColor: '#2ED3E9'}} className="lang">React</button>
-                <button style={{backgroundColor: '#298EC6', color: 'white'}} className="lang">Typescript</button>
-                <button style={{backgroundColor: '#599137', color: 'white'}} className="lang">Node.js</button>
-                <button style={{backgroundColor: '#FFD742'}} className="lang">Python</button>
-                <button style={{backgroundColor: '#D02B2B', color: 'white'}} className="lang">Ruby</button>
-                <button style={{backgroundColor: '#2D519F', color: 'white'}} className="lang">Assembly</button>
-            </div>
-
-            <div className="letters">
-                <div className="letter-element">
-                    <span className="letter-element-text">A</span>
-                </div>
-                <div className="letter-element">
-                    <span className="letter-element-text">A</span>
-                </div>
-                <div className="letter-element">
-                    <span className="letter-element-text">A</span>
-                </div>
-                <div className="letter-element">
-                    <span className="letter-element-text">A</span>
-                </div>
-                <div className="letter-element">
-                    <span className="letter-element-text">A</span>
-                </div>
-            </div>
-
-            <Keyboard />
-
+            <Header/>
+            <Update />
+            <Language />
+            <Letters word={gameWord} currentWord={currentState} />
+            <Keyboard pressedKeys={ pressedKeys } onClick={(alp) => { onKeyClick(alp) }} />
         </main>
     )
 }

@@ -93,7 +93,7 @@ header{
     font-weight: 700;
 }
 
-.alphabets{
+.keys{
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
@@ -102,10 +102,22 @@ header{
     margin-top: 4rem;
 }
 
-.alphabet-element{
+.key-element{
     width: 40px;
     height: 40px;
     border-radius: 4px;
     background-color: #FCBA29;
     border: 1px solid #D7D7D7
+}
+
+.right-key{
+    background-color: #10A95B;
+}
+
+.wrong-key{
+    background-color: #EC5D49;;
+}
+
+.game-over-key{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))
 }
