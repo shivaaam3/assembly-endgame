@@ -72,6 +72,7 @@ header{
 
 .letters{
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 0.2rem;
 }
@@ -105,6 +106,8 @@ header{
 .key-element{
     width: 40px;
     height: 40px;
+    font-size: 1rem;
+    font-weight: 700;
     border-radius: 4px;
     background-color: #FCBA29;
     border: 1px solid #D7D7D7

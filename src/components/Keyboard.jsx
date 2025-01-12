@@ -27,21 +27,25 @@ export default function Keyboard(props) {
     }, [props.pressedKeys])
 
     function handleClick(pressed, key) { 
-        if (pressed)
+        if (pressed || props.gameOverState !== `playing`)
             return
         props.onClick(key)
     }
 
-    function GetButtonStyle(key) { 
+    function getButtonStyle(key) {
+        let style = null
         if (key.pressed)
-            return key.isValid ? "right-key" : "wrong-key"
-        return null
+            style = key.isValid ? "right-key" : "wrong-key"
+
+        if (props.gameOverState !== `playing`)
+            style += ` game-over-key`
+        return style
     }
 
     return (
         <section className="keys">
             {keyboardArr.map((key) => <button
-                className={`key-element ${GetButtonStyle(key)}`}
+                className={`key-element ${getButtonStyle(key)}`}
                 key={key.value}
                 onClick={() => { handleClick(key.pressed, key.value) }}
             >

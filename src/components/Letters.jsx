@@ -1,7 +1,7 @@
 export default function Game(props) {
     const letters = props.currentWord.map((letter, index) => { 
         return <div key={index} className="letter-element">
-            <span className="letter-element-text">{letter}</span>
+            <span className="letter-element-text">{letter !== 0 && letter }</span>
             </div>
     })
 
