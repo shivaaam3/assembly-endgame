@@ -8,14 +8,14 @@ import Letters from "./Letters"
 
 export default function Main() {
 
-    // const [wordArray, setWordArray] = useState()
-    const [gameWord, setGameWord] = useState("Stethoscope")
+    const [gameWord, setGameWord] = useState("Apple")
     const [currentState, setCurrentState] = useState(Array(gameWord.length).fill(0))
     const [pressedKeys, setPressedKeys] = useState([])
-    const [attempts, setAttemps] = useState(8)
     const [isValid, setIsValid] = useState(true)
 
     let gameOverState = "playing"
+    let attempts = 8 - pressedKeys.filter(x => !x.isValid).length
+    
     function checkForGameOver() { 
         if (attempts <= 0) { 
             console.log("GameOver: You lost")
@@ -28,10 +28,6 @@ export default function Main() {
             gameOverState = "won"
             return
         }
-    }
-
-    function decrementAttemps() {
-        setAttemps(prevAttempts => prevAttempts - 1)
     }
 
     function onKeyClick(key) { 
@@ -48,7 +44,7 @@ export default function Main() {
             ))
         } else { 
             // key is invalid, decrement attempts
-            decrementAttemps()
+            // decrementAttemps()
         }
         // Update pressed key array with the key pressed
         // If keyOccuranceArr length is greater than zero, key pressed is valid
@@ -65,14 +61,20 @@ export default function Main() {
         return arr
     }
     checkForGameOver()
-
     return (
         <main>
             <Header/>
             <Update validKey={isValid} gameOverState={gameOverState} />
             <Language attemps={attempts} />
-            <Letters currentWord={currentState} />
-            <Keyboard gameOverState={gameOverState} pressedKeys={ pressedKeys } onClick={(alp) => { onKeyClick(alp) }} />
+            <Letters
+                gameWord = {gameWord}
+                currentWord={currentState}
+                gameOverState={gameOverState} 
+                />
+            <Keyboard
+                gameOverState={gameOverState}
+                pressedKeys={pressedKeys}
+                onClick={(alp) => { onKeyClick(alp) }} />
         </main>
     )
 }

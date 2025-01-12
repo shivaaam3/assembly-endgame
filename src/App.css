@@ -94,6 +94,10 @@ header{
     font-weight: 700;
 }
 
+.red-text{
+    color: red;
+}
+
 .keys{
     display: flex;
     flex-wrap: wrap;
