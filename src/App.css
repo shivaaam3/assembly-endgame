@@ -20,20 +20,22 @@ header{
     width: 352px;
     height: 59px;
     margin: auto;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.update {
     background-color: #7A5EA7;
     border: 3px dotted #323232;
-    border-radius: 4px;
 }
 
 .updates-main-text{
     font-style: italic;
     font-weight: 400;
-    font-size: 1rem;
 }
 
 .updates-sub-text{
     font-weight: 500;
-    font-size: 1rem;
 }
 
 .result-text{
@@ -77,7 +79,7 @@ header{
     gap: 0.2rem;
 }
 
-.letter-element{
+.letter-element-text{
     width: 40px;
     height: 40px;
     background-color: #323232;
@@ -85,11 +87,6 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.letter-element-text{
-    display: block;
-    justify-items: center;
     font-size: 1.125rem;
     font-weight: 700;
 }
@@ -127,4 +124,13 @@ header{
 
 .game-over-key{
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))
+}
+
+.new-game{
+    background-color: #11B5E5;
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.75rem 5rem;
 }

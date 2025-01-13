@@ -15,15 +15,15 @@ export default function Language(props) {
 
     function getStyle(item, index) { 
         return {
-            color: 7 - props.attemps < index ? item.color : `red`,
-            backgroundColor: 7 - props.attemps < index ? item.backgroundColor : `rgba(94, 94, 94, 0.9)`
+            color: index < props.wrongAttempts ? `red` : item.color,
+            backgroundColor: index < props.wrongAttempts ? `rgba(94, 94, 94, 0.9)` : item.backgroundColor
         }
     }
 
 
     return <div className="languages">{
         lang.map((item, index) => (
-            <button key={item.language} style={getStyle(item, index)} className="lang">{item.language}</button>
+            <span key={item.language} style={getStyle(item, index)} className="lang">{item.language}</span>
         ))
     }</div>
 }

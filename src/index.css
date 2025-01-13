@@ -30,3 +30,7 @@ main{
 p{
   margin-block: 0;
 }
+
+button{
+  cursor: pointer;
+}

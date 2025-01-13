@@ -9,72 +9,56 @@ import Letters from "./Letters"
 export default function Main() {
 
     const [gameWord, setGameWord] = useState("Apple")
-    const [currentState, setCurrentState] = useState(Array(gameWord.length).fill(0))
     const [pressedKeys, setPressedKeys] = useState([])
-    const [isValid, setIsValid] = useState(true)
-
-    let gameOverState = "playing"
-    let attempts = 8 - pressedKeys.filter(x => !x.isValid).length
     
+    let gameOverState = "playing"
+    
+    const wrongAttempts = pressedKeys.filter(x => !gameWord.toUpperCase().includes(x)).length
+    const lastGuessedLetter = pressedKeys[pressedKeys.length - 1]
+    const isValid = lastGuessedLetter && gameWord.toUpperCase().includes(lastGuessedLetter)
+
+    function newGame() { 
+        setGameWord("Apple")
+        setPressedKeys([])
+    }
+
     function checkForGameOver() { 
-        if (attempts <= 0) { 
+        if (wrongAttempts >= 8) { 
             console.log("GameOver: You lost")
             gameOverState = "lost"
             return
         }
 
-        if (currentState.find(x => x === 0) === undefined) { 
-            console.log("GameOver: You won")
+        const gameWonCheck = gameWord.toUpperCase().split("").every(letter => pressedKeys.includes(letter))
+
+        if (gameWonCheck) { 
             gameOverState = "won"
             return
         }
     }
 
     function onKeyClick(key) { 
-        const keyOccuranceArr = findAllOccurences(key)
-        const validKey = keyOccuranceArr.length > 0
-        if (validKey) {
-            // key is valid, update game state
-            setCurrentState(prevState => (
-                prevState.map((letter, index) => (
-                    // Check if Key Occurance Array contains the current index of iteration of game state
-                    // If it does, populate that index of game state with the key
-                    keyOccuranceArr.indexOf(index) !== -1 ? key : letter
-                ))
-            ))
-        } else { 
-            // key is invalid, decrement attempts
-            // decrementAttemps()
-        }
-        // Update pressed key array with the key pressed
-        // If keyOccuranceArr length is greater than zero, key pressed is valid
-        setPressedKeys(prev => [...prev, { value: key, isValid: validKey }])
-        setIsValid(validKey)
+        setPressedKeys(prev => [...prev, key])
     }
 
-    function findAllOccurences(key) { 
-        const arr = [];
-        for (let i = 0; i < gameWord.length; ++i) { 
-            if (gameWord[i].toLowerCase() === key.toLowerCase())
-                arr.push(i)
-        }
-        return arr
-    }
     checkForGameOver()
     return (
         <main>
             <Header/>
             <Update validKey={isValid} gameOverState={gameOverState} />
-            <Language attemps={attempts} />
+            <Language wrongAttempts={wrongAttempts} />
             <Letters
-                gameWord = {gameWord}
-                currentWord={currentState}
+                gameWord={gameWord}
+                pressedKeys={pressedKeys}
                 gameOverState={gameOverState} 
                 />
             <Keyboard
-                gameOverState={gameOverState}
+                gameWord={gameWord}
                 pressedKeys={pressedKeys}
+                gameOverState={gameOverState}
                 onClick={(alp) => { onKeyClick(alp) }} />
+            
+            {gameOverState !== 'playing' && <button className="new-game" onClick={newGame}>New Game</button>}
         </main>
     )
 }
