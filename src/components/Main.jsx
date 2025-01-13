@@ -4,21 +4,27 @@ import Header from "./Header"
 import Update from "./Update"
 import Language from "./Language"
 import Letters from "./Letters"
+import { words } from "../assets/data/words"
+import Confetti from 'react-confetti'
 
 
 export default function Main() {
 
-    const [gameWord, setGameWord] = useState("Apple")
+    const [gameWord, setGameWord] = useState(() => getNewWord())
     const [pressedKeys, setPressedKeys] = useState([])
     
     let gameOverState = "playing"
-    
+
     const wrongAttempts = pressedKeys.filter(x => !gameWord.toUpperCase().includes(x)).length
     const lastGuessedLetter = pressedKeys[pressedKeys.length - 1]
     const isValid = lastGuessedLetter && gameWord.toUpperCase().includes(lastGuessedLetter)
 
+    function getNewWord() { 
+        return words[Math.floor(Math.random() * words.length)]
+    }   
+
     function newGame() { 
-        setGameWord("Apple")
+        setGameWord(getNewWord())
         setPressedKeys([])
     }
 
@@ -45,7 +51,11 @@ export default function Main() {
     return (
         <main>
             <Header/>
-            <Update validKey={isValid} gameOverState={gameOverState} />
+            <Update
+                validKey={isValid}
+                gameOverState={gameOverState}
+                wrongAttempts={wrongAttempts}
+            />
             <Language wrongAttempts={wrongAttempts} />
             <Letters
                 gameWord={gameWord}
@@ -58,6 +68,7 @@ export default function Main() {
                 gameOverState={gameOverState}
                 onClick={(alp) => { onKeyClick(alp) }} />
             
+            {gameOverState === 'won' && <Confetti/>}
             {gameOverState !== 'playing' && <button className="new-game" onClick={newGame}>New Game</button>}
         </main>
     )

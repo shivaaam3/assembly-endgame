@@ -1,6 +1,7 @@
+import { languages } from "../assets/data/languages";
+
+
 export default function Update(props) {
-
-
 
     function getFarewellText(language) {
         const options = [
@@ -24,7 +25,7 @@ export default function Update(props) {
 
     function getUpdataData(){
         if (props.gameOverState === 'playing' && props.validKey === false)
-            return { mainText: getFarewellText("loga"), subText: null, class: `update` } 
+            return { mainText: getFarewellText(languages[props.wrongAttempts - 1].name), subText: null, class: `update` } 
 
         if (props.gameOverState === 'won')
             return { mainText: `You win!`, subText: `Well done! 🎉`, class: `won` } 
